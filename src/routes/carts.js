@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const newCart = new Cart({ products: [] }); 
-    const savedCart = await newCart.save(); 
+    const newCart = new Cart({ products: [] });
+    const savedCart = await newCart.save();
     res.status(201).json(savedCart);
   } catch (error) {
     console.error('Error al crear el carrito:', error);
@@ -18,9 +18,9 @@ router.post('/', async (req, res) => {
 router.get('/:cid', async (req, res) => {
   try {
     const { cid } = req.params;
-    const cart = await Cart.findById(cid).populate('products.product');
+    const cart = await Cart.findById(cid).populate('products.product'); 
     if (cart) {
-      res.json(cart.products);
+      res.json(cart.products); 
     } else {
       res.status(404).json({ error: 'Carrito no encontrado' });
     }
@@ -42,12 +42,12 @@ router.post('/:cid/product/:pid', async (req, res) => {
 
       const existingProduct = cart.products.find(p => p.product.equals(pid));
       if (existingProduct) {
-        existingProduct.quantity += 1; 
+        existingProduct.quantity += 1;
       } else {
-        cart.products.push({ product: pid, quantity: 1 }); 
+        cart.products.push({ product: pid, quantity: 1 });
       }
 
-      await cart.save();
+      await cart.save(); 
       res.status(201).json(cart);
     } else {
       res.status(404).json({ error: 'Carrito no encontrado' });

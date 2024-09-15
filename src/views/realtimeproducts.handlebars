@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos en Tiempo Real</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script> 
 </head>
 <body>
     <h1>Productos en Tiempo Real</h1>
@@ -18,13 +18,18 @@
 
         socket.on('newProduct', (product) => {
             const newItem = document.createElement('li');
+            newItem.id = product._id; 
             newItem.textContent = `${product.name} - $${product.price}`;
             productList.appendChild(newItem);
         });
 
         socket.on('deleteProduct', (product) => {
-
+            const productToRemove = document.getElementById(product._id);
+            if (productToRemove) {
+                productList.removeChild(productToRemove); 
+            }
         });
     </script>
 </body>
 </html>
+

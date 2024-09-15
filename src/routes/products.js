@@ -1,5 +1,5 @@
 import express from 'express';
-import Product from '../models/Product.js';
+import Product from '../models/Product.js'; 
 
 const router = express.Router();
 
@@ -32,3 +32,4 @@ router.delete('/:pid', async (req, res) => {
 });
 
 export default router;
+
